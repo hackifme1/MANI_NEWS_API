@@ -1,0 +1,1 @@
+# MANI_NEWS_API
