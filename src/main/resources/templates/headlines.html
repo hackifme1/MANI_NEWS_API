@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+      .header {
+                text-align: center;
+                padding: 20px;
+                background-color: #dfc5fe;
+                color: #ffffff; /* White text color */
+            }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .headline {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #ccc; /* Add a border below each headline */
+        }
+         .message {
+                background-color: #ffffff; /* Purple background */
+                color: #000000; /* White text color */
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+        .headline h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .headline p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .source {
+            font-style: italic;
+            color: #888888;
+        }
+
+        .publishedAt {
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .url {
+            font-size: 14px;
+            color: #0088cc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>NewsWave Daily Digest</h1>
+    </div>
+    <div class="message">
+        <p>Hello NewsWaver,</p>
+        <p>Grab a cup of coffee as we have brought to you headlines of the day curated according to your preferences.
+            You have opted for <span th:text="${category}"> </span> related news in <span th:text="${country}"> </span>.
+        </p>
+    </div>
+    <div th:each="headline : ${headlines}" class="headline">
+        <h2 th:text="${headline.title}">Title of the Headline</h2>
+        <p th:text="${headline.description}">Description of the headline goes here...</p>
+        <div th:if="${headline.urlToImage}">
+            <img th:src="${headline.urlToImage}" alt="Headline Image" th:width="300" th:height="200">
+        </div>
+        <div th:unless="${headline.urlToImage}">
+            <img th:src="${headline.image_url}" alt="Headline Image" th:width="300" th:height="200" th:if="${headline.image_url}">
+        </div>
+
+        <div class="source" th:text="${headline.source != null ? headline.source.name : (headline.source_id != null ? headline.source_id : '')}"></div>
+        <div class="publishedAt" th:if="${headline.publishedAt}" th:text="${headline.publishedAt}"></div>
+        <div class="publishedAt" th:unless="${headline.publishedAt}" th:text="${headline.pubDate}" th:if="${headline.pubDate}"></div>
+
+        <a th:if="${headline.url}" th:href="${headline.url}" class="url" target="_blank">Read more</a>
+        <a th:unless="${headline.url}" th:href="${headline.link}" class="url" target="_blank" th:if="${headline.link}">Read more</a>
+
+    </div>
+    <div class="footer">
+        <p>If you wish to unsubscribe from this service, Click <a th:href="@{|${baseUrl}user/unsubscribe?token=${unsubscribeToken}|}" style="color: #4B0082; text-decoration: underline;" target="_blank">here</a> </p>
+    </div>
+</div>
+
+</body>
+</html>

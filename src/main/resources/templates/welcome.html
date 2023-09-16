@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #dfc5fe; /* White background */
+            color: #ffffff; /* White text color */
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .message {
+            background-color: #ffffff; /* Purple background */
+            color: #000000; /* White text color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888888;
+        }
+
+        .footer a {
+            color: #888888;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Welcome to NewsWave!</h1>
+    </div>
+
+    <div class="message">
+        <p>Hello NewsWaver,</p>
+        <p>We're excited to have you as part of our news community! Get ready to stay informed with daily top news and headlines tailored just for you.</p>
+        <p>Verify your email address by clicking this <a th:href="@{|${baseUrl}user/verify?token=${verifyToken}|}" style="color: #4B0082; text-decoration: underline;" target="_blank">LINK</a> . Note that the link will expire in 15 minutes.</p>
+        <p>Every day, at around 9 AM, NewsWave will bring you a curated selection of the most important stories, keeping you up-to-date on what's happening around the world while you enjoy your coffee.</p>
+        <p>Thank you for choosing NewsWave. To start receiving our updates, <a th:href="@{|${baseUrl}user/subscribe?token=${subscribeToken}|}" style="color: #4B0082; text-decoration: underline;" target="_blank">click here to subscribe</a>.</p>
+        <p>If you ever decide to stop receiving our emails, you can <a th:href="@{|${baseUrl}user/unsubscribe?token=${unsubscribeToken}|}" style="color: #4B0082; text-decoration: underline;" target="_blank">unsubscribe here</a>.</p>
+        <p>Best regards,<br>The NewsWave Team</p>
+    </div>
+
+    <div class="footer">
+        <p>If you have any questions or feedback, don't hesitate to contact us at <a href="mailto:newsapi27@gmail.com" style="color: #4B0082; text-decoration: underline;">newsapi27@gmail.com</a></p>
+    </div>
+</div>
+</body>
+</html>

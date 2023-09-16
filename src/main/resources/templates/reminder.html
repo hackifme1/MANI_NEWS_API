@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Missed You!</title>
+    <style>
+        .container {
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        .header {
+            background-color: #4B0082;
+            color: white;
+            padding: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin-left: 41%;
+        }
+
+        .table th, .table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1> We Miss YOU!!</h1>
+    </div>
+    <div class="message">
+        <p>Hello <span th:text="NewsWaver" style="color: #4B0082"></span>, you have not used our services in quite some time.</p>
+        <p>Here are some of the top countries and categories</p>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+            <tr>
+                <th>Country</th>
+                <th>Subscribers</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${topThreeCountries}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Subscribers</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${topThreeCategories}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* Your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #dfc5fe;
+            color: #ffffff;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+         .message-box {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .leaderboard-entry {
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #ccc;
+            text-align: center; /* Align text in the middle */
+            background-color: linear-gradient(to bottom, #dfc5fe, #dfc5fe); /* Default starting color */
+            background-size: 100% 100%;
+        }
+        .leaderboard-entry:nth-child(1) {
+            background-color: linear-gradient(to bottom, #dfc5fe, white); /* Fading to white for the first entry */
+        }
+        .leaderboard-entry h2 {
+            margin-top: 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>NewsWave</h1>
+        <h2>Top Users of the week</h2>
+    </div>
+    <div class="message-box">
+        <p>Hello NewsWaver,</p>
+        <p>Meet the top users of NewsWave for this week. We wish to see you on the list every week.</p>
+    </div>
+    <div class="leaderboard-entry" th:each="entry, entryIndex : ${leaders}">
+        <h2 th:text="(${entry.user.email}) + ' (#' + (${entryIndex.index} + 1) + ')'">chandramani@gmail.com (#1)</h2>
+        <p th:text="'Country: ' + ${entry.user.selectedCountry} + ' | ' + 'Category interested in: ' + ${entry.user.selectedCategory}">Country: India | Category interested in: Business</p>
+        <p th:text="'Total Hits: ' + ${entry.totalCalls}">Total Hits: 0</p>
+    </div>
+    <div class="footer">
+        <p>If you wish to unsubscribe from this service, Click <a th:href="@{|${baseUrl}user/unsubscribe?token=${unsubscribeToken}|}" style="color: #4B0082; text-decoration: underline;" target="_blank">here</a></p>
+    </div>
+</div>
+</body>
+</html>
